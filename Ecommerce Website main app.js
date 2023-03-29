@@ -40,10 +40,10 @@ function ready() {
     //Add to cart
     var addCart = document.getElementsByClassName('add-cart')
     for(var i = 0; i < addCart.length; i++) {
-        // if(cartItemsNames[i].innerText == title) {
-        var button = addCart[i]
+              var button = addCart[i]
         button.addEventListener('click', addCartClicked)
     }
+
     //Buy Button Work
     document.getElementsByClassName("btn-buy")[0].addEventListener('click', buyButtonClicked)
 }
@@ -87,15 +87,18 @@ function quantityChanged(event) {
     }
 
 function addProductToCart(title, price, productImg) {
-    var cartShopBox = document.createElement('div')
+    var cartShopBox = document.createElement('div');
     cartShopBox.classList.add('cart-box')
     var cartItems = document.getElementsByClassName('cart-content')[0];
     var cartItemsNames = cartItems.getElementsByClassName('cart-product-title')
         for (var i = 0; i < cartItemsNames.length; i++) {
+            if (cartItemsNames[i].innerText == title) {
         alert("You have already added this item to cart");
         return;
+        }
     }
-}
+
+
 
 var cartBoxContent = `
     <img src="${productImg}" alt="" class="cart-img">
@@ -112,7 +115,7 @@ var cartBoxContent = `
     cartShopBox.getElementsByClassName("cart-remove")[0].addEventListener('click', removeCartItem);
     cartShopBox.getElementsByClassName("cart-quantity")[0].addEventListener('change', quantityChanged);
 
-
+}
 
 // Update Total
 
@@ -129,7 +132,7 @@ function updatetotal() {
         var quantity = quantityElement.value
         total = total + (price * quantity);
     }
-
+    
         //if cart contain same cents value
         total = Math.round(total * 100) / 100;
 
